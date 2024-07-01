@@ -1,8 +1,7 @@
 import javax.swing.*;
-
 public class TankWars extends JFrame {
-    private final int x = 800;
-    private final int y = 600;
+    public static final int x = 1000;
+    public static final int y = 800;
 
     public TankWars() {
         super("Tank WARS");
@@ -35,4 +34,5 @@ public class TankWars extends JFrame {
         revalidate();
         repaint();
     }
+
 }
