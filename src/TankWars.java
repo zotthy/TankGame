@@ -1,4 +1,8 @@
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 public class TankWars extends JFrame {
     public static final int x = 1000;
     public static final int y = 800;
@@ -6,23 +10,59 @@ public class TankWars extends JFrame {
     public TankWars() {
         super("Tank WARS");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-        setSize(x,y);
+        setSize(x, y);
         setLocationRelativeTo(null);
-        JMenuBar menuBar = new JMenuBar();
-        JMenu menu = new JMenu("Menu");
 
-        JMenuItem startMenuItem = new JMenuItem("Start");
-        startMenuItem.addActionListener(e -> startGame());
+        ImageIcon bgImageIcon = new ImageIcon("src/Assets/Main.png");
+        Image bgImage = bgImageIcon.getImage().getScaledInstance(x, y, Image.SCALE_SMOOTH);
+        ImageIcon scaledBgImageIcon = new ImageIcon(bgImage);
 
-        JMenuItem exitMenuItem = new JMenuItem("Exit");
-        exitMenuItem.addActionListener(e -> System.exit(0));
+        JLabel backgroundLabel = new JLabel(scaledBgImageIcon);
 
-        menu.add(startMenuItem);
-        menu.add(exitMenuItem);
+        JLabel textStart = new JLabel("Start");
+        textStart.setBounds(770, 260, 100, 100);
+        Font font = textStart.getFont();
+        textStart.setFont(new Font(font.getFontName(), Font.BOLD, 24));
+        textStart.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                textStart.setForeground(Color.RED);
+            }
 
-        menuBar.add(menu);
-        setJMenuBar(menuBar);
+            @Override
+            public void mouseExited(MouseEvent e) {
+                textStart.setForeground(Color.BLACK);
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                startGame();
+            }
+        });
+
+        JLabel textExit = new JLabel("Exit");
+        textExit.setBounds(770, 360, 100, 100);
+        textExit.setFont(new Font(font.getFontName(), Font.BOLD, 24));
+        textExit.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                textExit.setForeground(Color.RED);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                textExit.setForeground(Color.BLACK);
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.exit(0);
+            }
+        });
+
+        setContentPane(backgroundLabel);
+        add(textStart);
+        add(textExit);
 
         setVisible(true);
     }

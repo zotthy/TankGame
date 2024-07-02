@@ -5,14 +5,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 class GamePanel extends JPanel {
@@ -23,8 +16,8 @@ class GamePanel extends JPanel {
 
     public GamePanel() {
         setFocusable(true);
-        tank1 = new Tank(100, 300);
-        tank2 = new Tank(500, 300);
+        tank1 = new Tank(100, 300,1);
+        tank2 = new Tank(500, 300,2);
         bullets = new ArrayList<>();
         pressedKeys = new HashSet<>();
 
@@ -44,21 +37,21 @@ class GamePanel extends JPanel {
         Timer timer = new Timer(1000 / 60, e -> {
             handlePressedKeys();
             bullets.forEach(Bullet::update);
+            handleBulletCollision();
             repaint();
         });
         timer.start();
     }
 
     private void handleKeyPress(int keyCode) {
-        int targetAngle;
         switch (keyCode) {
             case KeyEvent.VK_SPACE:
                 int correctedAngle = (tank1.getAngle() + 90) % 360;
-                bullets.add(new Bullet(tank1.getX() + 45, tank1.getY() + 45, correctedAngle));
+                bullets.add(new Bullet(tank1.getX() + 45, tank1.getY() + 45, correctedAngle,tank1.getTankId()));
                 break;
             case KeyEvent.VK_SHIFT:
                 int correctedAngle2 = (tank2.getAngle() + 90) % 360;
-                bullets.add(new Bullet(tank2.getX() + 45, tank2.getY() + 45, correctedAngle2));
+                bullets.add(new Bullet(tank2.getX() + 45, tank2.getY() + 45, correctedAngle2,tank2.getTankId()));
                 break;
         }
     }
@@ -102,7 +95,32 @@ class GamePanel extends JPanel {
             }
         }
     }
+    private void handleBulletCollision() {
+        for (Iterator<Bullet> iterator = bullets.iterator(); iterator.hasNext(); ) {
+            Bullet bullet = iterator.next();
 
+            if (checkCollision(bullet, tank1) && bullet.getTankID() != tank1.getTankId()) {
+                System.out.println("Tank 1 has been hit!");
+                JOptionPane.showMessageDialog(null,"Tank 1 win");
+                System.exit(0);
+            }
+
+            if (checkCollision(bullet, tank2) && bullet.getTankID() != tank2.getTankId()) {
+                System.out.println("Tank 2 has been hit!");
+                JOptionPane.showMessageDialog(null,"Tank 2 win");
+                System.exit(0);
+            }
+        }
+    }
+    private boolean checkCollision(Bullet bullet, Tank tank) {
+        final int TANK_SIZE = 50;
+        final int BULLET_SIZE = 5;
+
+        boolean xOverlap = (bullet.getX() < tank.getX() + TANK_SIZE) && (bullet.getX() + BULLET_SIZE > tank.getX());
+        boolean yOverlap = (bullet.getY() < tank.getY() + TANK_SIZE) && (bullet.getY() + BULLET_SIZE > tank.getY());
+
+        return xOverlap && yOverlap;
+    }
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

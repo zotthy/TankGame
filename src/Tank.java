@@ -10,14 +10,16 @@ public class Tank {
     private int x;
     private int y;
     private int angle;
+    private int tankId;
 
     private BufferedImage tankImage;
     private final int SIZE = 20;
 
-    public Tank(int x, int y) {
+    public Tank(int x, int y,int tankId) {
         this.x = x;
         this.y = y;
         this.angle = 0;
+        this.tankId = tankId;
         try {
             tankImage = ImageIO.read(new File("src/Assets/Tank.png"));
         } catch (IOException e) {
@@ -64,6 +66,14 @@ public class Tank {
         System.out.println("r:" + angle);
     }
 
+
+    public int getTankId() {
+        return tankId;
+    }
+
+    public void setTankId(int tankId) {
+        this.tankId = tankId;
+    }
 
     public int getX() {
         return x;
