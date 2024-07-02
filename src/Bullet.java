@@ -6,11 +6,13 @@ public class Bullet {
 
     private int speed = 10;
     private int angle;
+    private int tankID;
 
-    public Bullet(int x, int y, int angle) {
+    public Bullet(int x, int y, int angle, int tankID) {
         this.x = x;
         this.y = y;
         this.angle = angle;
+        this.tankID = tankID;
     }
 
     public void update() {
@@ -23,15 +25,41 @@ public class Bullet {
         g.fillOval(x - 5, y - 5, 10, 10);
     }
 
-    public boolean Colide(Tank tank) {
-        int dx = tank.getX() - this.getX();
-        int dy = tank.getY() - this.getY();
-
-        return dx * dx + dy * dy <= 45 * 45;
-    }
 
     public int getX() {
         return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public int getAngle() {
+        return angle;
+    }
+
+    public void setAngle(int angle) {
+        this.angle = angle;
+    }
+
+    public int getTankID() {
+        return tankID;
+    }
+
+    public void setTankID(int tankID) {
+        this.tankID = tankID;
     }
 
     public int getY() {
