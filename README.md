@@ -10,8 +10,6 @@ Move using the w,a,s,d keys and the space bar
 #### The game ends after the first hit
 
 ## Game a local 1v1
-
-![Zrzut ekranu 2024-07-15 o 17.49.55.png](..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fkg%2F2c4z7xk944xb30pxm3yx0j800000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_ox55Pf%2FZrzut%20ekranu%202024-07-15%20o%2017.49.55.png)
-![Zrzut ekranu 2024-07-15 o 19.22.52.png](..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fkg%2F2c4z7xk944xb30pxm3yx0j800000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_zC7rwK%2FZrzut%20ekranu%202024-07-15%20o%2019.22.52.png)
-![Zrzut ekranu 2024-07-15 o 19.23.19.png](..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fkg%2F2c4z7xk944xb30pxm3yx0j800000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_nbN64U%2FZrzut%20ekranu%202024-07-15%20o%2019.23.19.png)
-
+![Zrzut ekranu 2024-07-15 o 19 54 53](https://github.com/user-attachments/assets/adb70d09-1650-4955-a3f1-765bc9d69b35)
+![Zrzut ekranu 2024-07-15 o 19 55 09](https://github.com/user-attachments/assets/be2f2384-8bc6-4256-a3a1-9200d2138aba)
+![Zrzut ekranu 2024-07-15 o 19 55 40](https://github.com/user-attachments/assets/724c9594-8001-4283-9583-e377096005c7)
