@@ -5,6 +5,8 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+
 
 public class Tank {
     private int x;
@@ -14,8 +16,9 @@ public class Tank {
 
     private BufferedImage tankImage;
     private final int SIZE = 20;
+    private static final int TANK_SIZE = 50;
 
-    public Tank(int x, int y,int tankId) {
+    public Tank(int x, int y, int tankId) {
         this.x = x;
         this.y = y;
         this.angle = 0;
@@ -48,24 +51,36 @@ public class Tank {
 
     }
 
-    public void move(int dx, int dy, int panelWidth, int panelHeight, int r) {
+    public void move(int dx, int dy, int panelWidth, int panelHeight, int angleDiff, List<Wall> walls) {
+        int newX = x + dx;
+        int newY = y + dy;
 
-        // Sprawdzanie pozycji czołgu
-        int NX = x + dx;
-        int NY = y + dy;
-
-        if (NX - SIZE / 2 >= 0 && NX + SIZE / 2 <= panelWidth && NY - SIZE / 2 >= 0 && NY + SIZE / 2 <= panelHeight) {
-            x = NX;
-            y = NY;
+        if (newX < 0 || newX + TANK_SIZE > panelWidth || newY < 0 || newY + TANK_SIZE > panelHeight) {
+            return;
         }
 
-        this.angle += r;
+        for (Wall wall : walls) {
+            if (checkCollisionWithWall(newX, newY, wall)) {
+                return;
+            }
+        }
+
+        x = newX;
+        y = newY;
+        angle = (angle + angleDiff) % 360;
 
         System.out.println("x:" + x);
         System.out.println("y:" + y);
         System.out.println("r:" + angle);
     }
 
+    private boolean checkCollisionWithWall(int newX, int newY, Wall wall) {
+        final int WALL_SIZE = 70;
+        boolean xOverlap = (wall.getX() < newX + TANK_SIZE) && (wall.getX() + WALL_SIZE > newX);
+        boolean yOverlap = (wall.getY() < newY + TANK_SIZE) && (wall.getY() + WALL_SIZE > newY);
+
+        return xOverlap && yOverlap;
+    }
 
     public int getTankId() {
         return tankId;

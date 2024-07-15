@@ -66,6 +66,7 @@ public class TankWars extends JFrame {
 
         setVisible(true);
     }
+
     private void startGame() {
         GamePanel gamePanel = new GamePanel();
         setContentPane(gamePanel);
